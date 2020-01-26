@@ -9,3 +9,8 @@ export interface Users {
   totalCount: number;
   results: User[];
 }
+
+export interface NewUser {
+  email: string;
+  username: string;
+}

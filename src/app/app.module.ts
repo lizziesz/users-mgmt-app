@@ -11,15 +11,21 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { ConfirmDeleteUserComponent } from './components/confirm-delete-user/confirm-delete-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersTableComponent,
     CreateNewUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    ConfirmDeleteUserComponent
   ],
-  entryComponents: [CreateNewUserComponent, EditUserComponent],
+  entryComponents: [
+    CreateNewUserComponent,
+    EditUserComponent,
+    ConfirmDeleteUserComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

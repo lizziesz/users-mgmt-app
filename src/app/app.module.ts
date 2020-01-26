@@ -10,14 +10,16 @@ import { MatTableModule, MatFormFieldModule, MatInputModule } from '@angular/mat
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersTableComponent,
-    CreateNewUserComponent
+    CreateNewUserComponent,
+    EditUserComponent
   ],
-  entryComponents: [CreateNewUserComponent],
+  entryComponents: [CreateNewUserComponent, EditUserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

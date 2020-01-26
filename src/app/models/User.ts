@@ -2,6 +2,7 @@ export interface User {
   id: string;
   email: string;
   firstname?: string;
+  lastname?: string;
   username: string;
 }
 
@@ -10,7 +11,9 @@ export interface Users {
   results: User[];
 }
 
-export interface NewUser {
+export interface UserRequest {
   email: string;
   username: string;
+  firstname?: string;
+  lastname?: string;
 }

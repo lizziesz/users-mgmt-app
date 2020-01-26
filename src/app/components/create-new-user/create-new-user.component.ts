@@ -11,12 +11,18 @@ import { MatDialogRef } from '@angular/material';
 export class CreateNewUserComponent implements OnInit  {
   public createUserForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private usersService: UsersService, private dialogRef: MatDialogRef<CreateNewUserComponent, any>) { }
+  constructor(
+    private fb: FormBuilder,
+    private usersService: UsersService,
+    private dialogRef: MatDialogRef<CreateNewUserComponent, any>
+  ) { }
 
   ngOnInit() {
     this.createUserForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       username: [null, [Validators.required]],
+      firstname: [null],
+      lastname: [null],
     });
   }
 

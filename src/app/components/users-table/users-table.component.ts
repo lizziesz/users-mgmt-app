@@ -4,6 +4,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { User } from 'src/app/models/User';
 import { Observable } from 'rxjs';
 import { CreateNewUserComponent } from '../create-new-user/create-new-user.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+
 @Component({
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
@@ -11,7 +13,7 @@ import { CreateNewUserComponent } from '../create-new-user/create-new-user.compo
 })
 export class UsersTableComponent implements OnInit {
   users$: Observable<User[]>;
-  displayedColumns: string[] = ['username', 'email'];
+  displayedColumns: string[] = ['username', 'name', 'email', 'edit', 'delete'];
 
   constructor(private usersService: UsersService, private dialog: MatDialog) { }
 
@@ -20,7 +22,11 @@ export class UsersTableComponent implements OnInit {
   }
 
   openCreateNewUserModal() {
-    console.log('open???')
     this.dialog.open(CreateNewUserComponent);
+  }
+
+  openEditUserModal(user: User) {
+    const dialogRef = this.dialog.open(EditUserComponent);
+    dialogRef.componentInstance.user = user;
   }
 }

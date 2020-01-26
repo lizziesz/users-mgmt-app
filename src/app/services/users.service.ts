@@ -51,6 +51,20 @@ export class UsersService {
     );
   }
 
+  public deleteUser$(userId: string) {
+    return this.http.delete<User>(`${environment.api}/systemusers/${userId}`).pipe(
+      tap((deletedUser) => {
+        const currentUsers = this.users$$.getValue();
+        const updatedUsers = currentUsers.filter((user) => user.id !== deletedUser.id);
+        this.users$$.next([...updatedUsers]);
+      }),
+      catchError((error) => {
+        console.error('deleteUser error', error);
+        return of(null);
+      }),
+    );
+  }
+
   private getUsers() {
     this.http.get<Users>(`${environment.api}/systemusers`)
       .subscribe((users) => {

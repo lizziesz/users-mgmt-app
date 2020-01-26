@@ -1,0 +1,10 @@
+<h3 mat-dialog-title>Delete User</h3>
+
+<div><strong>{{ user.username }}</strong> selected for deletion.</div>
+
+<div>Are you sure you would like to delete this User? Deletion will permanently remove all User data and associations. This action may not be undone.</div>
+
+<div>
+  <button mat-raised-button (click)="closeModal()">Cancel</button>
+  <button mat-raised-button color="warn" (click)="deleteUser()">Delete</button>
+</div>

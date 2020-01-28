@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UsersService } from 'src/app/services/users.service';
 import { MatDialogRef } from '@angular/material';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-create-new-user',
@@ -10,6 +10,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class CreateNewUserComponent implements OnInit  {
   public createUserForm: FormGroup;
+  public submitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,12 +28,16 @@ export class CreateNewUserComponent implements OnInit  {
   }
 
   createUser() {
-    console.log(this.createUserForm.value);
     if (this.createUserForm.valid) {
+      this.submitting = true;
       this.usersService.createUser$(this.createUserForm.value).subscribe(() => {
-        this.dialogRef.close();
+        this.submitting = false;
+        this.closeModal();
       });
     }
   }
 
+  closeModal() {
+    this.dialogRef.close();
+  }
 }

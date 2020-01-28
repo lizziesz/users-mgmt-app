@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/users.service';
-import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,6 +12,7 @@ import { MatDialogRef } from '@angular/material';
 export class EditUserComponent implements OnInit {
   @Input() user: User;
   public editUserForm: FormGroup;
+  public submitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,13 +30,17 @@ export class EditUserComponent implements OnInit {
   }
 
   editUser() {
-    console.log(this.editUserForm.value);
-    if (this.editUserForm.value) {
+    if (this.editUserForm.valid) {
+      this.submitting = true;
       this.usersService.editUser$(this.editUserForm.value, this.user.id)
         .subscribe(() => {
-          this.dialogRef.close();
+          this.submitting = false;
+          this.closeModal();
         });
     }
   }
 
+  closeModal() {
+    this.dialogRef.close();
+  }
 }

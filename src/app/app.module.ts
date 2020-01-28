@@ -6,7 +6,13 @@ import { AppComponent } from './app.component';
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { CreateNewUserComponent } from './components/create-new-user/create-new-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+  MatTableModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatSnackBarModule,
+} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -37,7 +43,8 @@ import { ConfirmDeleteUserComponent } from './components/confirm-delete-user/con
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { User, Users, UserRequest } from '../models/User';
@@ -28,8 +28,7 @@ export class UsersService {
         ]);
       }),
       catchError((error) => {
-        console.error('error', error);
-        return of(null);
+        return throwError(error);
       }),
     );
   }
@@ -45,8 +44,7 @@ export class UsersService {
         this.users$$.next([...usersToUpdate]);
       }),
       catchError((error) => {
-        console.error('editUser error', error);
-        return of(null);
+        return throwError(error);
       }),
     );
   }
@@ -59,8 +57,7 @@ export class UsersService {
         this.users$$.next([...updatedUsers]);
       }),
       catchError((error) => {
-        console.error('deleteUser error', error);
-        return of(null);
+        return throwError(error);
       }),
     );
   }
@@ -68,7 +65,6 @@ export class UsersService {
   private getUsers() {
     this.http.get<Users>(`${environment.api}/systemusers`)
       .subscribe((users) => {
-        console.error('users', users);
         this.users$$.next(users.results);
       });
   }

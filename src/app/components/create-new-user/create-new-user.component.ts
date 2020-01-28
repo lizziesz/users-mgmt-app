@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class CreateNewUserComponent implements OnInit  {
   constructor(
     private fb: FormBuilder,
     private usersService: UsersService,
-    private dialogRef: MatDialogRef<CreateNewUserComponent, any>
+    private dialogRef: MatDialogRef<CreateNewUserComponent, any>,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -30,10 +31,14 @@ export class CreateNewUserComponent implements OnInit  {
   createUser() {
     if (this.createUserForm.valid) {
       this.submitting = true;
-      this.usersService.createUser$(this.createUserForm.value).subscribe(() => {
-        this.submitting = false;
-        this.closeModal();
-      });
+      this.usersService.createUser$(this.createUserForm.value)
+        .subscribe(() => {
+          this.submitting = false;
+          this.closeModal();
+        }, (error) => {
+          this.submitting = false;
+          this.snackBar.open(`${error.error}`, null, { duration: 3000 });
+        });
     }
   }
 

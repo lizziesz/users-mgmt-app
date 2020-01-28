@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -17,7 +17,8 @@ export class EditUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usersService: UsersService,
-    private dialogRef: MatDialogRef<EditUserComponent, any>
+    private dialogRef: MatDialogRef<EditUserComponent, any>,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -36,6 +37,9 @@ export class EditUserComponent implements OnInit {
         .subscribe(() => {
           this.submitting = false;
           this.closeModal();
+        }, (error) => {
+          this.submitting = false;
+          this.snackBar.open(`${error.error}`, null, { duration: 3000 });
         });
     }
   }

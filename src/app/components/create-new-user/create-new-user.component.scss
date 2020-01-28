@@ -1,0 +1,15 @@
+.user_field {
+  width: 100%;
+}
+
+.name_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.button_container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 25px;
+}

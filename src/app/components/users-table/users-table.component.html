@@ -1,9 +1,9 @@
-<div>
-  <button mat-fab (click)="openCreateNewUserModal()">
+<div class="main_container">
+  <button class="new" mat-fab (click)="openCreateNewUserModal()">
     <i class="material-icons">add</i>
   </button>
 
-  <div *ngIf="users$ | async as users">
+  <div *ngIf="users$ | async as users" class="table_container">
     <table mat-table [dataSource]="users" class="mat-elevation-z8">
       <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef>Username</th>
@@ -43,7 +43,11 @@
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; let even = even; columns: displayedColumns;"
+        [ngClass]="{gray: even}"
+      ></tr>
     </table>
   </div>
 </div>

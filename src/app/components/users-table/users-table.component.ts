@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UsersService } from 'src/app/services/users.service';
-import { User } from 'src/app/models/User';
 import { Observable } from 'rxjs';
+import { ConfirmDeleteUserComponent } from '../confirm-delete-user/confirm-delete-user.component';
 import { CreateNewUserComponent } from '../create-new-user/create-new-user.component';
 import { EditUserComponent } from '../edit-user/edit-user.component';
-import { ConfirmDeleteUserComponent } from '../confirm-delete-user/confirm-delete-user.component';
+import { User } from 'src/app/models/User';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-users-table',
@@ -23,11 +23,17 @@ export class UsersTableComponent implements OnInit {
   }
 
   openCreateNewUserModal() {
-    this.dialog.open(CreateNewUserComponent);
+    this.dialog.open(CreateNewUserComponent, {
+      height: '50vh',
+      width: '50vw',
+    });
   }
 
   openEditUserModal(user: User) {
-    const dialogRef = this.dialog.open(EditUserComponent);
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      height: '50vh',
+      width: '50vw',
+    });
     dialogRef.componentInstance.user = user;
   }
 
